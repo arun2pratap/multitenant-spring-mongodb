@@ -20,11 +20,5 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 )
 public class SharedMongoConfig {
 
-    @Bean
-    public MongoTemplate mongoTemplateShared(MongoClient mongoClient, MongoConfigProperties mongoConfigProperties, MappingMongoConverter converter) {
-        MongoDatabaseFactory mongoDbFactory = new SimpleMongoClientDatabaseFactory(mongoClient, mongoConfigProperties.getDataBaseName());
-        MongoTemplate template = new MongoTemplate(mongoDbFactory, converter);
-        return template;
-    }
 }
 

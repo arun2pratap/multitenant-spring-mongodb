@@ -6,12 +6,9 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document
 public class Planet {
     @Id
-    private String id;
     private String name;
+    private String desc;
 
-    public String getId() {
-        return id;
-    }
 
     public String getName() {
         return name;

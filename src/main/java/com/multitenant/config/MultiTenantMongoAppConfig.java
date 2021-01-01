@@ -6,6 +6,8 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.*;
 import org.springframework.data.mongodb.MongoDatabaseFactory;
 import org.springframework.data.mongodb.config.AbstractMongoClientConfiguration;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.SimpleMongoClientDatabaseFactory;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
 @Configuration
@@ -28,4 +30,9 @@ public class MultiTenantMongoAppConfig extends AbstractMongoClientConfiguration 
         return new MultiTenantMongoDBFactory(mongoClient(), globalDB);
     }
 
+    @Bean
+    public MongoTemplate mongoTemplateShared(MongoConfigProperties mongoConfigProperties) {
+        MongoDatabaseFactory mongoDbFactory = new SimpleMongoClientDatabaseFactory(mongoClient(), mongoConfigProperties.getDataBaseName());
+        return new MongoTemplate(mongoDbFactory);
+    }
 }
