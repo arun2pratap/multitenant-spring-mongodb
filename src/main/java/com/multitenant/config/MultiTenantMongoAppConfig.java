@@ -8,6 +8,7 @@ import org.springframework.data.mongodb.MongoDatabaseFactory;
 import org.springframework.data.mongodb.config.AbstractMongoClientConfiguration;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.SimpleMongoClientDatabaseFactory;
+import org.springframework.data.mongodb.core.convert.MappingMongoConverter;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
 @Configuration
@@ -28,6 +29,13 @@ public class MultiTenantMongoAppConfig extends AbstractMongoClientConfiguration 
     public MongoDatabaseFactory mongoDbFactory() {
         String globalDB = mongoConfigProperties.getDataBaseName();
         return new MultiTenantMongoDBFactory(mongoClient(), globalDB);
+    }
+
+    @Override
+    @Bean
+    @Primary
+    public MongoTemplate mongoTemplate(MongoDatabaseFactory mongoDbFactory, MappingMongoConverter converter) {
+        return new MongoTemplate(mongoDbFactory, converter);
     }
 
     @Bean
