@@ -1,4 +1,4 @@
-# multitenant-spring-mongodb
+# Multitenant Database with Spring Boot and MongoDB
 ## Full featured multi-tenant/tenancy with Spring Boot + MongoDB + Spring MVC
 
 ### BLOG on this repo, that will help to understand the code.
